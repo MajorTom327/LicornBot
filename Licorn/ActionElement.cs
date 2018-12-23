@@ -7,7 +7,7 @@ using WindowsInput.Native;
 
 namespace Licorn
 {
-    class ActionElement
+    public class ActionElement
     {
         public string ActionName { get; set; }
         public VirtualKeyCode Key { get; set; }

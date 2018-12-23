@@ -1,88 +1,124 @@
-﻿<Window x:Class="Licorn.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Licorn"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="MainWindowView" x:Class="Licorn.MainWindow"
         mc:Ignorable="d"
         Title="Licorn Bot"
         Width="558"
-        Height="439.944"
-        ResizeMode="NoResize"
+        Height="480"
+        MinWidth="480"
+        MinHeight="300"
+        MaxHeight="640"
+        SizeToContent="WidthAndHeight"
         
-        Topmost="True" >
+        Topmost="True" Background="White" >
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <!--<RowDefinition/>
+            <RowDefinition Height="Auto"/>-->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="100px"/>
-            <ColumnDefinition MinWidth="100px"/>
+            <ColumnDefinition MinWidth="100px" Width="*"/>
+            <ColumnDefinition MinWidth="100px" Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="BotStatus" Grid.ColumnSpan="2" HorizontalAlignment="Center">Not Running</Label>
-        <Button x:Name="StartButton" Click="StartButton_Click" Grid.Row="1" Grid.Column="0">
-            <Button.Margin>10</Button.Margin>
-            <Button.VerticalAlignment>Top</Button.VerticalAlignment>
-            <Button.Height>22</Button.Height>
-            <Button.Content>Start</Button.Content>
+        <Label x:Name="BotStatus" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Column="0" Margin="0" Content="Not Running"/>
+        <Button x:Name="StartButton" Click="StartButton_Click" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1">
+            <Button.Margin>
+                <Thickness>10,10,10,0</Thickness>
+            </Button.Margin>
+            <Button.VerticalAlignment>
+                <VerticalAlignment>Top</VerticalAlignment>
+            </Button.VerticalAlignment>
+            <Button.Height>
+                <System:Double>22</System:Double>
+            </Button.Height> Start
         </Button>
         <Button x:Name="StopButton" Click="StopButton_Click" Grid.Row="1" Grid.Column="1">
-            <Button.Margin>10</Button.Margin>
-            <Button.VerticalAlignment>Top</Button.VerticalAlignment>
-            <Button.Height>22</Button.Height>
-            <Button.Content>Stop</Button.Content>
+            <Button.Margin>
+                <Thickness>10,10,10,0</Thickness>
+            </Button.Margin>
+            <Button.VerticalAlignment>
+                <VerticalAlignment>Top</VerticalAlignment>
+            </Button.VerticalAlignment>
+            <Button.Height>
+                <System:Double>22</System:Double>
+            </Button.Height> Stop
         </Button>
-        <ListBox Grid.ColumnSpan="1" Margin="0" Grid.Row="2" Grid.Column="0" x:Name="ListViewOrigin">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="{Binding ActionName}"></Label>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <ListBox Grid.ColumnSpan="1" Margin="0" Grid.Row="2" Grid.Column="1" x:Name="ListViewDest">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="{Binding ActionName}"></Label>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <!--
-        <ListView x:Name="ListViewOrigin" Grid.ColumnSpan="1" Margin="0" Grid.Row="2" Grid.Column="0">
-            <ListViewItem>Space Key</ListViewItem>
-            <ListViewItem>Number</ListViewItem>
-        </ListView>
-        <ListView x:Name="ListViewDest" Grid.ColumnSpan="1" Margin="0" Grid.Row="2" Grid.Column="1">
-        </ListView>
-        -->
-        <Button
+        
+        <Grid x:Name="BotEditorGrid" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="0, 10, 0, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Action Time:"/>
+            <TextBox x:Name="TimerValue"
+                     Grid.Column="1"
+                     TextChanged="TimerValue_TextChanged"
+                     PreviewTextInput="InputNumberFilter"/>
+            <Label Grid.Column="2" Content="Antriopy:"/>
+            <TextBox x:Name="Antriopy"
+                     Grid.Column="3"
+                     TextChanged="AntriopyChanged"
+                     PreviewTextInput="InputNumberFilter"/>
+
+        </Grid>
+            <ListBox Grid.ColumnSpan="1" Margin="0" Grid.Row="1" Grid.Column="0" x:Name="ListViewOrigin" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding ActionName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ListBox Grid.ColumnSpan="1" Margin="0" Grid.Row="1" Grid.Column="1" x:Name="ListViewDest" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding ActionName}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button
+            x:Name="AddElementButton"
             Grid.Column="0"
             Grid.ColumnSpan="1"
-            Grid.Row="3"
+            Grid.Row="2"
             Margin="10" Click="OnSwitchClick"
-            >
-            <Button.Content>Add Element</Button.Content>
-        </Button>
-        <Button
+            >Add Element</Button>
+            <Button
             x:Name="RemoveButton"
             Grid.Column="1"
             Grid.ColumnSpan="1"
-            Grid.Row="3"
+            Grid.Row="2"
             Margin="10" Click="OnDeleteClick"
-            >
-            <Button.Content>Remove Element</Button.Content>
-        </Button>
+            >Remove Element</Button>
+        </Grid>
     </Grid>
 </Window>

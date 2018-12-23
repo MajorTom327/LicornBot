@@ -14,6 +14,9 @@ namespace Licorn.Keyboard
     {
         public List<KeyAction> _keys = new List<KeyAction>();
 
+        public int TimerSpan { get; set; }
+        public int Antriopy { get; set; }
+
         public KeyboardManager()
         {
 
@@ -21,10 +24,14 @@ namespace Licorn.Keyboard
 
         public void Execute()
         {
+            System.Random rand = new System.Random();
+            
             foreach (KeyAction key in _keys)
             {
                 key.Execute();
-                Thread.Sleep(250);
+                
+                Thread.Sleep(TimerSpan + 
+                    rand.Next(this.Antriopy) - this.Antriopy / 2);
             }
         }
 
@@ -32,6 +39,12 @@ namespace Licorn.Keyboard
         {
             _keys.Add(new KeyAction(key));
             return this;
+        }
+
+        public KeyboardManager Clear()
+        {
+            this._keys.Clear();
+            return (this);
         }
     }
 }
