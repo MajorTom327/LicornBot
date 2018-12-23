@@ -5,8 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Licorn"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Licorn Bot"
+        Width="558"
+        Height="439.944"
+        ResizeMode="NoResize"
         
+        Topmost="True" >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="100px"/>
+            <ColumnDefinition MinWidth="100px"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="BotStatus" Grid.ColumnSpan="2" HorizontalAlignment="Center">Not Running</Label>
+        <Button x:Name="StartButton" Click="StartButton_Click" Grid.Row="1" Grid.Column="0">
+            <Button.Margin>10</Button.Margin>
+            <Button.VerticalAlignment>Top</Button.VerticalAlignment>
+            <Button.Height>22</Button.Height>
+            <Button.Content>Start</Button.Content>
+        </Button>
+        <Button x:Name="StopButton" Click="StopButton_Click" Grid.Row="1" Grid.Column="1">
+            <Button.Margin>10</Button.Margin>
+            <Button.VerticalAlignment>Top</Button.VerticalAlignment>
+            <Button.Height>22</Button.Height>
+            <Button.Content>Stop</Button.Content>
+        </Button>
+        <ListBox Grid.ColumnSpan="1" Margin="0" Grid.Row="2" Grid.Column="0" x:Name="ListViewOrigin">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="{Binding ActionName}"></Label>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Grid.ColumnSpan="1" Margin="0" Grid.Row="2" Grid.Column="1" x:Name="ListViewDest">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="{Binding ActionName}"></Label>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!--
+        <ListView x:Name="ListViewOrigin" Grid.ColumnSpan="1" Margin="0" Grid.Row="2" Grid.Column="0">
+            <ListViewItem>Space Key</ListViewItem>
+            <ListViewItem>Number</ListViewItem>
+        </ListView>
+        <ListView x:Name="ListViewDest" Grid.ColumnSpan="1" Margin="0" Grid.Row="2" Grid.Column="1">
+        </ListView>
+        -->
+        <Button
+            Grid.Column="0"
+            Grid.ColumnSpan="1"
+            Grid.Row="3"
+            Margin="10" Click="OnSwitchClick"
+            >
+            <Button.Content>Add Element</Button.Content>
+        </Button>
+        <Button
+            x:Name="RemoveButton"
+            Grid.Column="1"
+            Grid.ColumnSpan="1"
+            Grid.Row="3"
+            Margin="10" Click="OnDeleteClick"
+            >
+            <Button.Content>Remove Element</Button.Content>
+        </Button>
     </Grid>
 </Window>
